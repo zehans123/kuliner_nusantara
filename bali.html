@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuliner Khas Bali</title>
+    <style>
+        /* ============ RESET & GLOBAL ============ */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        /* ============ NAVBAR ============ */
+        .navbar {
+            background-color: #ffffff;
+            padding: 15px 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo h2 {
+            margin: 0;
+            font-size: 1.5em;
+            color: #b22222; /* Firebrick / Terracotta - Nuansa Pura Bali */
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #333;
+            margin-left: 20px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: #DAA520; /* Warna Emas */
+        }
+
+        /* ============ HEADER ============ */
+        header {
+            /* Menggunakan gradient coklat untuk nuansa klasik/batik */
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('bali1.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        header h1 { margin: 0; font-size: 2.5em; text-shadow: 2px 2px 4px black; }
+        header p { margin-top: 10px; font-size: 1.2em; opacity: 0.9; }
+
+        /* ============ KONTEN CARD ============ */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+        }
+
+        .card {
+            background-color: white;
+            width: 300px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #b22222; /* Menyesuaikan tema merah bata */
+        }
+
+        .card-desc {
+            font-size: 0.95em;
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            text-align: center;
+            padding: 10px 15px;
+            background-color: #DAA520; /* Goldenrod */
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.9em;
+            cursor: pointer;
+            transition: background 0.2s;
+            border: none;
+            width: 100%;
+        }
+
+        .btn:hover {
+            background-color: #b8860b;
+        }
+
+        /* ============ TOMBOL KEMBALI & FOOTER ============ */
+        .wrapper-btn-back {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .back-btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: #333;
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            transition: background 0.3s;
+        }
+
+        .back-btn:hover {
+            background: #555;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #2c2c2c;
+            color: #ddd;
+            margin-top: auto;
+        }
+
+        /* ============ POPUP (MODAL) ============ */
+        .popup {
+            display: none;
+            position: fixed;
+            left: 0; top: 0;
+            width: 100vw; height: 100vh;
+            background: rgba(0,0,0,0.6);
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            backdrop-filter: blur(2px);
+        }
+
+        .popup-content {
+            background: white;
+            width: 500px;
+            max-width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            animation: fadeIn 0.3s;
+            position: relative;
+        }
+
+        .popup-content h2 {
+            margin-top: 0;
+            color: #b22222;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .popup-content pre {
+            white-space: pre-wrap;
+            font-family: 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: #444;
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            color: #aaa;
+            cursor: pointer;
+        }
+
+        .close:hover { color: #d00; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* ============ MOBILE RESPONSIVE ============ */
+        @media (max-width: 768px) {
+            .navbar { flex-direction: column; padding: 15px; }
+            .nav-menu { margin-top: 15px; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+            .nav-menu a { margin: 5px; font-size: 0.9em; }
+            .card { width: 100%; max-width: 350px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">
+            <h2>Kuliner Nusantara</h2>
+        </div>
+        <div class="nav-menu">
+            <a href="index.html">Home</a> 
+            <a href="sumatera.html">Sumatera</a>
+            <a href="jawa.html">Jawa</a>
+            <a href="kalimantan.html">Kalimantan</a>
+            <a href="sulawesi.html">Sulawesi</a>
+            <a href="bali.html" style="color:#DAA520; font-weight:bold;">Bali</a>
+        </div>
+    </nav>
+
+    <header>
+        <h1>Kuliner Bali</h1>
+        <p>Menjelajahi kelezatan rempah "Base Genep" dari Pulau Dewata</p>
+    </header>
+    
+    <div class="container">
+
+        <div class="card">
+            <img src="ayam-betutu.jpeg" alt="Ayam Betutu">
+            <div class="card-content">
+                <div>
+                    <div class="card-title">Ayam Betutu</div>
+                    <p class="card-desc">Ayam utuh yang dibalur bumbu rempah super lengkap (Base Genep) dan dimasak perlahan hingga sangat empuk.</p>
+                </div>
+                <button class="btn"
+                    data-judul="Resep Ayam Betutu Gilimanuk"
+                    data-resep="Bahan Utama:
+- 1 ekor ayam kampung utuh (belah tengah tidak putus)
+- Daun singkong (rebus, peras) untuk isian
+- Daun pisang untuk membungkus
+
+Bumbu Base Genep (Rajang Kasar/Ulek):
+- 15 bawang merah & 6 bawang putih
+- 4 cabe merah besar & 10 cabe rawit
+- 4 cm kunyit, jahe, lengkuas, kencur
+- 2 batang serai (iris halus)
+- 1 sdt terasi bakar
+- Ketumbar, merica, pala bubuk
+
+Cara Memasak:
+1. Tumis bumbu base genep dengan minyak kelapa hingga wangi.
+2. Lumuri ayam dengan bumbu hingga rata (luar dan dalam).
+3. Campur sisa bumbu dengan daun singkong, masukkan ke dalam rongga perut ayam.
+4. Bungkus ayam rapat dengan daun pisang.
+5. Kukus selama 2 jam hingga empuk.
+6. (Opsional) Panggang sebentar di oven/arang agar aroma daun pisang keluar.
+7. Sajikan dengan sambal matah.">
+                    Lihat Resep
+                </button>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="Sate-Lilit.jpeg" alt="Sate Lilit">
+            <div class="card-content">
+                <div>
+                    <div class="card-title">Sate Lilit</div>
+                    <p class="card-desc">Sate unik dari daging cincang yang dicampur kelapa parut dan rempah, dililitkan pada batang serai.</p>
+                </div>
+                <button class="btn"
+                    data-judul="Resep Sate Lilit Bali"
+                    data-resep="Bahan:
+- 300g daging ikan tenggiri/ayam giling
+- 50g kelapa parut muda
+- 30 ml santan kental
+- Batang serai (untuk tusukan)
+
+Bumbu Halus:
+- 6 bawang merah & 3 bawang putih
+- 3 cabai merah keriting
+- 2 cm kunyit (bakar), kencur, jahe
+- Daun jeruk iris tipis
+- Gula merah & garam
+
+Cara Memasak:
+1. Campur daging giling, kelapa parut, dan santan dalam wadah.
+2. Tumis bumbu halus hingga harum, biarkan dingin sebentar.
+3. Campurkan bumbu tumis ke adonan daging. Aduk rata hingga tekstur bisa dibentuk.
+4. Ambil sebatang serai, ambil adonan secukupnya.
+5. Lilitkan adonan pada batang serai sambil ditekan agar menempel kuat.
+6. Bakar di atas arang atau teflon hingga matang kecoklatan.">
+                    Lihat Resep
+                </button>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="Nasi-Jinggo.jpeg" alt="Nasi Jinggo">
+            <div class="card-content">
+                <div>
+                    <div class="card-title">Nasi Jinggo</div>
+                    <p class="card-desc">Nasi rames porsi mini yang dibungkus daun pisang, terkenal dengan sambalnya yang pedas menyengat.</p>
+                </div>
+                <button class="btn"
+                    data-judul="Komponen Nasi Jinggo"
+                    data-resep="Komponen Utama (Dalam 1 Bungkus):
+1. Nasi Putih: Porsi kepalan tangan (sekitar 100g).
+2. Ayam Suwir Pelalah: Ayam rebus disuwir, ditumis dengan bumbu pedas manis.
+3. Mie Goreng: Mie kuning goreng sederhana dengan kecap.
+4. Tempe Goreng Kering: Tempe potong korek api dimasak manis pedas.
+5. Serundeng: Kelapa parut sangrai gurih.
+6. SAMBAL JINGGO (Kunci Utama):
+   - Cabai rawit merah (banyak), bawang putih, terasi, garam.
+   - Ulek halus dan siram minyak panas.
+
+Cara Penyajian:
+1. Ambil selembar daun pisang.
+2. Taruh nasi di tengah.
+3. Kelilingi nasi dengan ayam suwir, mie, tempe, dan serundeng.
+4. Taruh sambal di atas nasi.
+5. Bungkus bentuk kerucut dan semat dengan lidi.">
+                    Lihat Resep
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="wrapper-btn-back">
+        <a href="index.html" class="back-btn">← Kembali ke Halaman Utama</a>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Kuliner Nusantara - Edisi Bali</p>
+    </footer>
+
+    <div id="popupResep" class="popup">
+        <div class="popup-content">
+            <span class="close">&times;</span>
+            <h2 id="popupJudul">Judul Resep</h2>
+            <pre id="popupIsi">Isi resep...</pre>
+        </div>
+    </div>
+
+    <script>
+        const popup = document.getElementById("popupResep");
+        const popupJudul = document.getElementById("popupJudul");
+        const popupIsi = document.getElementById("popupIsi");
+        const closeBtn = document.querySelector(".close");
+        const buttons = document.querySelectorAll(".btn");
+
+        buttons.forEach(btn => {
+            btn.addEventListener("click", function() {
+                const judul = this.getAttribute("data-judul");
+                const resep = this.getAttribute("data-resep");
+                
+                popupJudul.textContent = judul;
+                popupIsi.textContent = resep;
+                popup.style.display = "flex";
+            });
+        });
+
+        closeBtn.onclick = function() { popup.style.display = "none"; };
+        window.onclick = function(e) { 
+            if (e.target == popup) popup.style.display = "none"; 
+        };
+    </script>
+
+</body>
+</html>

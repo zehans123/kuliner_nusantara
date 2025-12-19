@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuliner Khas Jawa</title>
+    <style>
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f3f3dc;
+            color: #333;
+        }
+
+
+        .navbar {
+            background-color: #f4f8fa;
+            padding: 15px 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo h2 {
+            margin: 0;
+            font-size: 1.5em;
+            color: #5d4037; 
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #333;
+            margin-left: 20px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: #d4a017; 
+        }
+
+
+        header {
+
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('batik.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        header h1 { margin: 0; font-size: 2.5em; text-shadow: 2px 2px 4px black; }
+        header p { margin-top: 10px; font-size: 1.2em; opacity: 0.9; }
+
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+        }
+
+        .card {
+            background-color: white;
+            width: 300px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #5d4037;
+        }
+
+        .card-desc {
+            font-size: 0.95em;
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            text-align: center;
+            padding: 10px 15px;
+            background-color: #d4a017;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.9em;
+            cursor: pointer;
+            transition: background 0.2s;
+            border: none;
+            width: 100%;
+        }
+
+        .btn:hover {
+            background-color: #b8860b;
+        }
+
+        .wrapper-btn-back {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .back-btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: #333;
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            transition: background 0.3s;
+        }
+
+        .back-btn:hover {
+            background: #555;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #2c2c2c;
+            color: #ddd;
+            margin-top: auto;
+        }
+
+
+        .popup {
+            display: none;
+            position: fixed;
+            left: 0; top: 0;
+            width: 100vw; height: 100vh;
+            background: rgba(0,0,0,0.6);
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            backdrop-filter: blur(2px);
+        }
+
+        .popup-content {
+            background: white;
+            width: 500px;
+            max-width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            animation: fadeIn 0.3s;
+            position: relative;
+        }
+
+        .popup-content h2 {
+            margin-top: 0;
+            color: #5d4037;
+            border-bottom: 2px solid #f8f3f3;
+            padding-bottom: 10px;
+        }
+
+        .popup-content pre {
+            white-space: pre-wrap;
+            font-family: 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: #444;
+            background: #f0e4e4;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            color: #aaa;
+            cursor: pointer;
+        }
+
+        .close:hover { color: #d00; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @media (max-width: 768px) {
+            .navbar { flex-direction: column; padding: 15px; }
+            .nav-menu { margin-top: 15px; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+            .nav-menu a { margin: 5px; font-size: 0.9em; }
+            .card { width: 100%; max-width: 350px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">
+            <h2>Kuliner Nusantara</h2>
+        </div>
+        <div class="nav-menu">
+            <a href="index.html">Home</a> 
+            <a href="sumatera.html">Sumatera</a>
+            <a href="jawa.html" style="color:#d4a017; font-weight:bold;">Jawa</a>
+            <a href="kalimantan.html">Kalimantan</a>
+            <a href="sulawesi.html">Sulawesi</a>
+            <a href="bali.html">Bali</a>
+        </div>
+    </nav>
+
+    <header>
+        <h1>Monggo Pinarak</h1>
+        <p>Menjelajahi kehangatan cita rasa kuliner Tanah Jawa</p>
+    </header>
+    
+    <div class="container">
+
+        <div class="card">
+            <img src="gudeg.jpeg" alt="Gudeg Jogja">
+            <div class="card-content">
+                <div>
+                    <div class="card-title">Gudeg Jogja</div>
+                    <p class="card-desc">Olahan nangka muda (gori) yang dimasak berjam-jam dengan gula aren dan santan hingga manis gurih.</p>
+                </div>
+                <button class="btn"
+                    data-judul="Resep Gudeg Jogja Komplit"
+                    data-resep="Bahan Utama:
+- 1 kg nangka muda (potong kotak)
+- 5 butir telur rebus (kupas)
+- 1 liter santan kental
+- 1 liter santan encer
+- Daun jati (opsional, untuk warna merah alami)
+
+Bumbu Halus:
+- 15 siung bawang merah & 6 siung bawang putih
+- 1 sdm ketumbar bubuk
+- 6 butir kemiri
+
+Bumbu Cemplung:
+- 250g gula merah (sisir)
+- 3 ruas lengkuas (geprek)
+- 5 lembar daun salam
+- Garam secukupnya
+
+Cara Memasak:
+1. Alasi panci dengan daun jati (jika ada).
+2. Masukkan nangka muda, bumbu halus, gula merah, dan bumbu cemplung.
+3. Tuang santan encer. Masak dengan api sedang hingga kuah menyusut.
+4. Masukkan telur rebus dan santan kental.
+5. Masak terus dengan api SANGAT KECIL (slow cook) selama 3-5 jam sambil sesekali diaduk hati-hati.
+6. Masak hingga kuah habis (Gudeg Kering) atau sisakan sedikit (Gudeg Basah).
+7. Sajikan dengan krecek sambal goreng.">
+                    Lihat Resep Lengkap
+                </button>
+            </div>
+        </div>
+
+        <div class="card">
+             <img src="rawon.jpeg" alt="Rawon Surabaya">
+            <div class="card-content">
+                <div>
+                    <div class="card-title">Rawon Surabaya</div>
+                    <p class="card-desc">Sup daging sapi berkuah hitam pekat dari kluwek, memiliki aroma rempah yang kuat dan rasa gurih.</p>
+                </div>
+                <button class="btn"
+                    data-judul="Resep Rawon Surabaya"
+                    data-resep="Bahan:
+- 500g daging sapi (sandung lamur)
+- 2 liter air
+- Daun bawang & Tauge pendek (pelengkap)
+
+Bumbu Halus (Kunci Utama):
+- 6 buah kluwek (ambil isinya, rendam air panas)
+- 8 bawang merah & 4 bawang putih
+- 2 butir kemiri, kunyit, jahe, ketumbar, merica
+
+Bumbu Cemplung:
+- Serai, daun jeruk, lengkuas
+
+Cara Memasak:
+1. Rebus daging sapi hingga empuk, potong dadu. Gunakan air rebusan sebagai kaldu.
+2. Tumis bumbu halus dan bumbu cemplung hingga harum dan matang (warna jadi gelap).
+3. Masukkan tumisan bumbu ke dalam panci kaldu daging.
+4. Masak kembali hingga mendidih dan bumbu meresap ke daging.
+5. Koreksi rasa dengan garam dan gula.
+6. Sajikan panas dengan taburan tauge pendek, telur asin, dan kerupuk udang.">
+                    Lihat Resep Lengkap
+                </button>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="soto-lamongan.jpeg" alt="Soto Lamongan">
+            <div class="card-content">
+                <div>
+                    <div class="card-title">Soto Lamongan</div>
+                    <p class="card-desc">Soto ayam legendaris dengan kuah kuning, taburan koya udang yang gurih, dan irisan daging ayam kampung.</p>
+                </div>
+                <button class="btn"
+                    data-judul="Resep Soto Lamongan & Koya"
+                    data-resep="Bahan:
+- 1 ekor ayam kampung
+- 2 liter air
+- Sohun, kol iris, telur rebus (pelengkap)
+
+Bumbu Koya (Wajib):
+- Kerupuk udang goreng
+- Bawang putih goreng
+(Tumbuk kedua bahan ini hingga jadi bubuk)
+
+Bumbu Halus Kuah:
+- 8 siung bawang merah & 5 siung bawang putih
+- 4 butir kemiri (sangrai)
+- 3 cm kunyit (bakar), jahe, merica
+
+Cara Memasak:
+1. Rebus ayam hingga empuk. Angkat ayam, lalu goreng sebentar dan suwir-suwir.
+2. Tumis bumbu halus dengan serai dan daun jeruk hingga harum.
+3. Masukkan bumbu ke dalam air kaldu bekas rebusan ayam.
+4. Tambahkan garam, gula, dan penyedap. Masak hingga mendidih.
+5. Tata nasi, sohun, kol, dan ayam suwir di mangkuk.
+6. Siram kuah panas.
+7. Taburi BUBUK KOYA yang banyak agar kuah jadi kental dan gurih.">
+                    Lihat Resep Lengkap
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="wrapper-btn-back">
+        <a href="index.html" class="back-btn">← Kembali ke Halaman Utama</a>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Kuliner Nusantara - Edisi Jawa</p>
+    </footer>
+
+    <div id="popupResep" class="popup">
+        <div class="popup-content">
+            <span class="close">&times;</span>
+            <h2 id="popupJudul">Judul Resep</h2>
+            <pre id="popupIsi">Isi resep...</pre>
+        </div>
+    </div>
+
+    <script>
+        const popup = document.getElementById("popupResep");
+        const popupJudul = document.getElementById("popupJudul");
+        const popupIsi = document.getElementById("popupIsi");
+        const closeBtn = document.querySelector(".close");
+        const buttons = document.querySelectorAll(".btn");
+
+        // Logic: Satu fungsi untuk semua tombol
+        buttons.forEach(btn => {
+            btn.addEventListener("click", function() {
+                const judul = this.getAttribute("data-judul");
+                const resep = this.getAttribute("data-resep");
+                
+                popupJudul.textContent = judul;
+                popupIsi.textContent = resep;
+                popup.style.display = "flex";
+            });
+        });
+
+        closeBtn.onclick = function() { popup.style.display = "none"; };
+        window.onclick = function(e) { 
+            if (e.target == popup) popup.style.display = "none"; 
+        };
+    </script>
+
+</body>
+</html>

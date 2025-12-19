@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kuliner Nusantara</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="logo">
+    <h2>Kuliner Nusantara</h2>
+  </div>
+  <div class="nav-menu">
+    <a href="index.html">Home</a> 
+    <a href="sumatera.html">Sumatera</a>
+    <a href="jawa.html">Jawa</a>
+    <a href="kalimantan.html">Kalimantan</a>
+    <a href="sulawesi.html">Sulawesi</a>
+    <a href="bali.html">Bali</a>
+  </div>
+</nav>
+
+<header class="hero" id="home">
+  <div class="hero-content">
+    <h1 class="hero-title">Jelajahi Kuliner Nusantara</h1>
+    <p class="hero-subtitle">Website Rekomendasi Makanan Tradisional Indonesia</p>
+  </div>
+</header>
+
+<section class="post-section">
+  <h2 class="section-title">Rekomendasi Makanan Daerah</h2>
+
+  <div class="post-container">
+
+    <div class="post-card" id="sumatera">
+      <div class="post-thumb" style="background-image: url('rendang.jpeg');"></div>
+      <span class="post-label label-sumatera">Sumatera</span>
+
+      <div class="post-content">
+        <h2 class="post-title">Rendang</h2>
+        <p class="post-info">Masakan khas Minangkabau berbahan dasar daging sapi dengan rempah-rempah.</p>
+        <button class="detail-btn" onclick="openModal('rendang')">Lihat Detail</button>
+      </div>
+    </div>
+
+    <div class="post-card" id="jawa">
+      <div class="post-thumb" style="background-image: url('gudeg.jpeg');"></div>
+      <span class="post-label label-jawa">Jawa</span>
+
+      <div class="post-content">
+        <h2 class="post-title">Gudeg</h2>
+        <p class="post-info">Makanan khas Yogyakarta berbahan dasar nangka muda dengan rasa manis.</p>
+        <button class="detail-btn" onclick="openModal('gudeg')">Lihat Detail</button>
+      </div>
+    </div>
+
+    <div class="post-card" id="kalimantan">
+      <div class="post-thumb" style="background-image: url('soto-banjar.jpeg');"></div>
+      <span class="post-label label-kalimantan">Kalimantan</span>
+
+      <div class="post-content">
+        <h2 class="post-title">Soto Banjar</h2>
+        <p class="post-info">Soto khas Kalimantan Selatan dengan kuah bening dan rempah khas.</p>
+        <button class="detail-btn" onclick="openModal('sotobanjar')">Lihat Detail</button>
+      </div>
+    </div>
+
+    <div class="post-card" id="sulawesi">
+      <div class="post-thumb" style="background-image: url('coto-makasar.jpeg');"></div>
+      <span class="post-label label-sulawesi">Sulawesi</span>
+
+      <div class="post-content">
+        <h2 class="post-title">Coto Makassar</h2>
+        <p class="post-info">Sup daging khas Makassar dengan kuah kacang dan rempah kuat.</p>
+        <button class="detail-btn" onclick="openModal('cotomakassar')">Lihat Detail</button>
+      </div>
+    </div>
+
+    <div class="post-card" id="bali">
+      <div class="post-thumb" style="background-image: url('ayam-betutu.jpeg');"></div>
+      <span class="post-label label-bali">Bali</span>
+
+      <div class="post-content">
+        <h2 class="post-title">Ayam Betutu</h2>
+        <p class="post-info">Ayam berbumbu khas Bali yang dimasak lama dengan daun pisang.</p>
+        <button class="detail-btn" onclick="openModal('ayambetutu')">Lihat Detail</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<button class="detail-btn" style="width: auto; position: fixed; bottom: 20px; right: 20px; z-index: 99;" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+  ↑ Top
+</button>
+
+<footer class="footer">
+  <p>© 2025 Kuliner Nusantara | Project Rizky Zehan's Onassis</p>
+</footer>
+
+<!-- MODAL -->
+<div id="foodModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeModal()">&times;</span>
+    <img id="modalImg" class="modal-img" src="" alt="Makanan Detail">
+    <div class="modal-body">
+      <h2 id="modalTitle">Judul Makanan</h2>
+      <p id="modalDesc">Deskripsi lengkap akan muncul di sini.</p>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

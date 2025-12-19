@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuliner Khas Sulawesi</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        .navbar {
+            background-color: #ffffff;
+            padding: 15px 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo h2 {
+            margin: 0;
+            font-size: 1.5em;
+            color: #0077b6; 
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #333;
+            margin-left: 20px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: #DAA520; /* Warna Emas */
+        }
+
+        /* ============ HEADER ============ */
+        header {
+            /* Menggunakan gradient coklat untuk nuansa klasik/batik */
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('sulawesi1.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        header h1 { margin: 0; font-size: 2.5em; text-shadow: 2px 2px 4px black; }
+        header p { margin-top: 10px; font-size: 1.2em; opacity: 0.9; }
+
+        /* ============ KONTEN CARD ============ */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+        }
+
+        .card {
+            background-color: white;
+            width: 300px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #0077b6; /* Menyesuaikan tema biru */
+        }
+
+        .card-desc {
+            font-size: 0.95em;
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            text-align: center;
+            padding: 10px 15px;
+            background-color: #DAA520; /* Goldenrod */
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.9em;
+            cursor: pointer;
+            transition: background 0.2s;
+            border: none;
+            width: 100%;
+        }
+
+        .btn:hover {
+            background-color: #b8860b;
+        }
+
+        /* ============ TOMBOL KEMBALI & FOOTER ============ */
+        .wrapper-btn-back {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .back-btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: #333;
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            transition: background 0.3s;
+        }
+
+        .back-btn:hover {
+            background: #555;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #2c2c2c;
+            color: #ddd;
+            margin-top: auto;
+        }
+
+        /* ============ POPUP (MODAL) ============ */
+        .popup {
+            display: none;
+            position: fixed;
+            left: 0; top: 0;
+            width: 100vw; height: 100vh;
+            background: rgba(0,0,0,0.6);
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            backdrop-filter: blur(2px);
+        }
+
+        .popup-content {
+            background: white;
+            width: 500px;
+            max-width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            animation: fadeIn 0.3s;
+            position: relative;
+        }
+
+        .popup-content h2 {
+            margin-top: 0;
+            color: #0077b6;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .popup-content pre {
+            white-space: pre-wrap;
+            font-family: 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: #444;
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            color: #aaa;
+            cursor: pointer;
+        }
+
+        .close:hover { color: #d00; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* ============ MOBILE RESPONSIVE ============ */
+        @media (max-width: 768px) {
+            .navbar { flex-direction: column; padding: 15px; }
+            .nav-menu { margin-top: 15px; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+            .nav-menu a { margin: 5px; font-size: 0.9em; }
+            .card { width: 100%; max-width: 350px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">
+            <h2>Kuliner Nusantara</h2>
+        </div>
+        <div class="nav-menu">
+            <a href="index.html">Home</a> 
+            <a href="sumatera.html">Sumatera</a>
+            <a href="jawa.html">Jawa</a>
+            <a href="kalimantan.html">Kalimantan</a>
+            <a href="sulawesi.html" style="color:#DAA520; font-weight:bold;">Sulawesi</a>
+            <a href="bali.html">Bali</a>
+        </div>
+    </nav>
+
+    <header>
+        <h1>Celebes Flavor</h1>
+        <p>Menjelajahi rasa pedas, segar, dan kaya rempah khas Sulawesi</p>
+    </header>
+    
+    <div class="container">
+
+        <div class="card">
+            <img src="coto-makasar.jpeg" alt="Coto Makassar">
+            <div class="card-content">
+                <div>
+                    <div class="card-title">Coto Makassar</div>
+                    <p class="card-desc">Soto kental yang terbuat dari jeroan sapi dan kacang tanah sangrai, dengan aroma rempah kuat.</p>
+                </div>
+                <button class="btn"
+                    data-judul="Resep Coto Makassar Asli"
+                    data-resep="Bahan Utama:
+- 500g daging sapi & jeroan (babat/hati)
+- 2 liter air cucian beras (tajin) - Kunci kental
+- 150g kacang tanah (sangrai & haluskan sampai berminyak)
+
+Bumbu Halus:
+- 10 bawang merah & 6 bawang putih
+- 5 butir kemiri (sangrai)
+- 1 sdm ketumbar, 1/2 sdt jintan
+- Serai, lengkuas, jahe, daun salam
+
+Cara Memasak:
+1. Rebus daging dengan air tajin hingga empuk. Potong dadu.
+2. Tumis bumbu halus dengan serai & daun salam hingga harum matang.
+3. Masukkan bumbu ke dalam rebusan daging.
+4. Masukkan kacang tanah halus. Masak hingga kuah mengental dan berminyak.
+5. Tambahkan garam & penyedap.
+6. Sajikan panas dengan ketupat, bawang goreng, dan irisan daun bawang.">
+                    Lihat Resep
+                </button>
+            </div>
+        </div>
+
+        <div class="card">
+             <img src="Tinutuan.jpeg" alt="Tinutuan Bubur Manado">
+            <div class="card-content">
+                <div>
+                    <div class="card-title">Tinutuan (Bubur Manado)</div>
+                    <p class="card-desc">Bubur sehat kaya sayuran (labu, jagung, kangkung) yang disajikan dengan sambal roa.</p>
+                </div>
+                <button class="btn"
+                    data-judul="Resep Tinutuan / Bubur Manado"
+                    data-resep="Bahan:
+- 100g beras (masak jadi bubur encer)
+- 200g labu kuning (potong dadu)
+- 1 buah jagung manis (pipil)
+- 1 ikat bayam & kangkung
+- Daun kemangi (secukupnya)
+- Serai & daun kunyit
+
+Pelengkap:
+- Ikan asin goreng
+- Sambal Dabu-dabu / Sambal Roa
+
+Cara Memasak:
+1. Masak beras bersama serai, daun kunyit, dan labu kuning hingga labu hancur dan bubur mengental.
+2. Masukkan jagung manis, masak sebentar.
+3. Masukkan sayuran hijau (bayam/kangkung), aduk hingga layu (jangan overcooked).
+4. Matikan api, masukkan daun kemangi agar tetap wangi.
+5. Sajikan hangat dengan ikan asin dan sambal.">
+                    Lihat Resep
+                </button>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="Sop-Konro.jpeg" alt="Sop Konro">
+            <div class="card-content">
+                <div>
+                    <div class="card-title">Sop Konro</div>
+                    <p class="card-desc">Sup iga sapi khas Bugis dengan kuah hitam pekat dari kluwek yang gurih dan daging yang empuk.</p>
+                </div>
+                <button class="btn"
+                    data-judul="Resep Sop Konro Makassar"
+                    data-resep="Bahan:
+- 1 kg iga sapi (potong ruas)
+- 2 liter air
+- 3 buah kluwek (ambil isi, rendam air panas)
+
+Bumbu Halus:
+- 8 bawang merah & 5 bawang putih
+- 1 sdt ketumbar, 1/2 sdt jintan, 1/2 sdt pala
+- 3 cm lengkuas, kunyit, jahe
+- Kacang merah (opsional)
+
+Cara Memasak:
+1. Rebus iga sapi hingga empuk (buang buih kotornya).
+2. Haluskan bumbu bersama kluwek.
+3. Tumis bumbu hingga wangi dan pekat.
+4. Masukkan tumisan ke dalam panci rebusan iga.
+5. Tambahkan air asam jawa, garam, dan gula secukupnya.
+6. Masak hingga bumbu meresap sempurna.
+7. Sajikan dengan buras atau nasi hangat.">
+                    Lihat Resep
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="wrapper-btn-back">
+        <a href="index.html" class="back-btn">← Kembali ke Halaman Utama</a>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Kuliner Nusantara - Edisi Sulawesi</p>
+    </footer>
+
+    <div id="popupResep" class="popup">
+        <div class="popup-content">
+            <span class="close">&times;</span>
+            <h2 id="popupJudul">Judul Resep</h2>
+            <pre id="popupIsi">Isi resep...</pre>
+        </div>
+    </div>
+
+    <script>
+        const popup = document.getElementById("popupResep");
+        const popupJudul = document.getElementById("popupJudul");
+        const popupIsi = document.getElementById("popupIsi");
+        const closeBtn = document.querySelector(".close");
+        const buttons = document.querySelectorAll(".btn");
+
+        buttons.forEach(btn => {
+            btn.addEventListener("click", function() {
+                const judul = this.getAttribute("data-judul");
+                const resep = this.getAttribute("data-resep");
+                
+                popupJudul.textContent = judul;
+                popupIsi.textContent = resep;
+                popup.style.display = "flex";
+            });
+        });
+
+        closeBtn.onclick = function() { popup.style.display = "none"; };
+        window.onclick = function(e) { 
+            if (e.target == popup) popup.style.display = "none"; 
+        };
+    </script>
+
+</body>
+</html>
